@@ -1,18 +1,16 @@
 {
   "name": "connect-tryfiles",
   "description": "nginx try_files style connect middleware: serve local file if exists or proxy to address",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/gadr/connect-tryfiles.git"
   },
-  "main": "index.coffee",
   "engines": {
     "node": "0.10.x",
     "npm": "1.2.x"
   },
   "scripts": {
-    "start": "coffee index.coffee",
     "test": "mocha --compilers coffee:coffee-script/register --reporter spec specs/**",
     "test-watch": "mocha --watch --compilers coffee:coffee-script/register --reporter spec specs/**"
   },
@@ -28,5 +26,15 @@
     "chai": "^1.9.1",
     "connect": "^2.14.5",
     "request": "^2.34.0"
-  }
+  },
+  "readme": "connect-tryfiles\n================\n\n![Build status](https://travis-ci.org/gadr/connect-tryfiles.png)\n\nnginx try_files style connect middleware: serve local file if exists or proxy to address\n\n### Idea\n\nIf a local file is available at the path corresponding to the URL, this middleware will do nothing (giving the chance to some other middleware serve it).\nElse, it will proxy the request to the given target.\nThis way, you can serve local files easily and proxy the rest to your remote server.\n\n### Usage\n\n    connect = require 'connect'\n    http = require 'http'\n    tryfiles = require 'connect-tryfiles'\n\n    app = connect()\n        .use(tryfiles('**', 'http://localhost:9000', {cwd: 'files'}))\n        .use(connect.static('./files'))\n\n    server = http.createServer(app).listen(8000)\n\nAssuming there is\n\n- a file at `./files/foo`\n- a different server listening at localhost:9000 that returns \"world\" to any request\n\nRequests to:\n\n- `http://localhost:8000/foo` will retrieve the file at `files/foo`\n- `http://localhost:8000/hello` will return \"world\"\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/gadr/connect-tryfiles/issues"
+  },
+  "homepage": "https://github.com/gadr/connect-tryfiles",
+  "_id": "connect-tryfiles@0.2.1",
+  "_shasum": "50d68b8020ad7c2a90dc50a8ab26c17aab067b56",
+  "_from": "connect-tryfiles@^0.2.1",
+  "_resolved": "https://registry.npmjs.org/connect-tryfiles/-/connect-tryfiles-0.2.1.tgz"
 }
