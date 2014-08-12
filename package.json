@@ -7,8 +7,7 @@
     "url": "https://github.com/gadr/connect-tryfiles.git"
   },
   "engines": {
-    "node": "0.10.x",
-    "npm": "1.2.x"
+    "node": ">=0.10.x"
   },
   "scripts": {
     "test": "mocha --compilers coffee:coffee-script/register --reporter spec specs/**",
